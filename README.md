@@ -1,2 +1,2 @@
-# hocker
-Python package for combining .hocr files and images into searchable PDFs
+HOCkeR
+Python package for combining hOCR files and images into searchable PDFs
