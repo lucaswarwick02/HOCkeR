@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hocker_package_lucaswarwick02"
+version = "0.0.1"
+authors = [
+  { name="Lucas Warwick", email="lucaswarwick02@gmail.com" },
+]
+description = "Python package for combining .hocr files and images into searchable PDFs"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/lucaswarwick02/HOCkeR"
+"Bug Tracker" = "https://github.com/lucaswarwick02/HOCkeR/issues"
