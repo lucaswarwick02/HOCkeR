@@ -60,7 +60,7 @@ class hOCR():
         # get dimensions of the OCR, which may not match the image
         if self.hocr is not None:
             for div in self.hocr.findall(".//%sdiv"%(self.xmlns)):
-                if div.attrib['class'] in self.attributes:
+                if div.attrib['class'] == 'ocr_page':
                     coords = self._element_coordinates(div)
                     ocrwidth = coords[2]-coords[0]
                     ocrheight = coords[3]-coords[1]
@@ -87,7 +87,7 @@ class hOCR():
     
         if self.hocr is not None:
             for line in self.hocr.findall(".//%sspan"%(self.xmlns)):
-                if line.attrib['class'] == 'ocr_line':
+                if line.attrib['class'] in self.attributes:
                     coords = self._element_coordinates(line)
                     text = pdf.beginText()
                     text.setFont(fontname, fontsize)
@@ -97,10 +97,10 @@ class hOCR():
                     text.setTextOrigin((float(coords[0])/ocr_dpi[0])*inch, (height*inch)-(float(coords[3])/ocr_dpi[1])*inch)
           
                     # scale the width of the text to fill the width of the line's bbox
-                    text.setHorizScale((((float(coords[2])/ocr_dpi[0]*inch)-(float(coords[0])/ocr_dpi[0]*inch))/pdf.stringWidth(line.text.rstrip(), fontname, fontsize))*100)
+                    text.setHorizScale((((float(coords[2])/ocr_dpi[0]*inch)-(float(coords[0])/ocr_dpi[0]*inch))/pdf.stringWidth(str(line.text).rstrip(), fontname, fontsize))*100)
           
                     # write the text to the page
-                    text.textLine(line.text.rstrip())
+                    text.textLine(str(line.text).rstrip())
                     pdf.drawText(text)
     
         # finish up the page and save it
@@ -111,7 +111,7 @@ if __name__ == '__main__':
     image_path = "page.png"
     hocr_path = "page.html"
 
-    hocr = hOCR(['ocr_line'])
+    hocr = hOCR(['ocr_line', 'ocr_word', 'ocrx_word'])
     hocr.locate_image(image_path)
     hocr.locate_hocr(hocr_path)
 
