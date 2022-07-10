@@ -3,10 +3,11 @@ from reportlab.lib.units import inch
 from xml.etree.ElementTree import ElementTree
 from PIL import Image
 import re, sys
-
+import os
+from pathlib import Path
 
 class hOCR():
-    def __init__(self, attributes):
+    def __init__(self, *attributes):
         self.attributes = attributes
         self.hocr_path = None
         self.image_path = None
@@ -108,11 +109,14 @@ class hOCR():
         pdf.save()
 
 if __name__ == '__main__':
-    image_path = "page.png"
-    hocr_path = "page.html"
+    root_path = Path(__file__).parent.parent.parent
+    
+    tests_path = os.path.join(root_path, 'tests')
+    image_path = os.path.join(tests_path, 'page.png')
+    hocr_path = os.path.join(tests_path, 'page.html')
 
-    hocr = hOCR(['ocr_line', 'ocr_word', 'ocrx_word'])
+    hocr = hOCR('ocr_line', 'ocr_word', 'ocrx_word')
     hocr.locate_image(image_path)
     hocr.locate_hocr(hocr_path)
 
-    hocr.to_pdf("page.pdf")
+    hocr.to_pdf(os.path.join(tests_path, 'page.pdf'))
