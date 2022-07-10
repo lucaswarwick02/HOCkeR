@@ -129,5 +129,3 @@ dmypy.json
 .pyre/
 
 .token
-
-tests/page.pdf
