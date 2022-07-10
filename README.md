@@ -20,13 +20,13 @@ If any errors occur whilst installing, try using the .whl file instead [linked h
 Below is an example of how to use hOCkeR to combine an png and a .hocr file into a PDF
 
 ```python
-import hOCkeR as hkr
+import hocker as hkr
 
 image_path = 'path/to/image.png'
 hocr_path = 'path/to/image.hocr'
 
 # Specify the element in the hocr file to use as the text
-hocr = hOCR('ocrx_word') # For tesseract outputs, it is 'ocrx_word'
+hocr = hkr.HOCRCombiner('ocrx_word') # For tesseract outputs, it is 'ocrx_word'
 
 # Specify the hocr and image path
 hocr.locate_image(image_path)

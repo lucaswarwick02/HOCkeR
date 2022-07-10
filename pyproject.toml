@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "hocker"
-version = "1.0.1"
+version = "1.0.4"
 authors = [
   { name="Lucas Warwick", email="lucaswarwick02@gmail.com" },
 ]
