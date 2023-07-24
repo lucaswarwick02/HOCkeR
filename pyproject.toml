@@ -18,6 +18,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
+dependencies = ["reportlab"]
 [project.urls]
 "Homepage" = "https://github.com/lucaswarwick02/HOCkeR"
 "Bug Tracker" = "https://github.com/lucaswarwick02/HOCkeR/issues"
