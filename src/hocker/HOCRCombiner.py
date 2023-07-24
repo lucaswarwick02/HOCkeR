@@ -1,10 +1,12 @@
 from reportlab.pdfgen.canvas import Canvas
+from reportlab.lib.utils import ImageReader
 from reportlab.lib.units import inch
 from xml.etree.ElementTree import ElementTree
 from PIL import Image
 import re, sys
 import os
 from pathlib import Path
+
 
 class HOCRCombiner():
     def __init__(self, *attributes : str):
@@ -87,7 +89,8 @@ class HOCRCombiner():
         pdf = Canvas(pdf_path, pagesize=(width*inch, height*inch), pageCompression=1) # page size in points (1/72 in.)
 
         # put the image on the page, scaled to fill the page
-        pdf.drawInlineImage(im, 0, 0, width=width*inch, height=height*inch)
+        im_reader = ImageReader(self.image_path)
+        pdf.drawImage(im_reader, 0, 0, width=width*inch, height=height*inch)
     
         if self.hocr is not None:
             for line in self.hocr.findall(".//%sspan"%(self.xmlns)):
@@ -110,6 +113,7 @@ class HOCRCombiner():
         # finish up the page and save it
         pdf.showPage()
         pdf.save()
+
 
 if __name__ == '__main__':
     root_path = Path(__file__).parent.parent.parent
